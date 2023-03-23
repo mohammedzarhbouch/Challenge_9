@@ -14,10 +14,14 @@
             <img src="11image11.png" alt="profile" height="75px"></img>
         </a>
         </button>
-        <button class="logout" onclick="Popup()">
-            <span class="logout_text" id="MyPopup">are you sure you want to log out?</span>
-            <img src="2023-03-22.png" alt="logout" height="75px"></img> 
+        <div class="popup">
+            <button onclick="Popup()">
+            <img src="2023-03-22.png" alt="logout" height="75px"></img>
+            <span class="popuptext" id="myPopup">Are you sure you want to log out? 
+                <button class="yes">Yes</button>
+                <button class="no">No</button>
+            </span>
         </button>
-        </div>
+          </div>
 </body>
 </html>
