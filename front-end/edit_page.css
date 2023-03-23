@@ -1,0 +1,62 @@
+h1{
+    font-family: 'Poppins', sans-serif;
+}
+#title{
+    position: relative;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+#greybox1{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 100px;
+    width: 30%;
+    margin-top: 5%;
+    
+}
+#greybox2{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 300px;
+    width: 30%;
+    margin-top: -5%;
+    margin-left: 50%;
+}
+#greybox1edit{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 40px;
+    width: 5%;
+    margin-top: -22.7%;
+    margin-left: 33%;
+}
+#greybox1save{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 40px;
+    width: 5%;
+    margin-top: 1.2%;
+    margin-left: 33%;
+}
+
+#greybox2edit{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 40px;
+    width: 5%;
+    margin-top: -1.8%;
+    margin-left: 83%;
+}
+#greybox2save{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.411);
+    height: 40px;
+    width: 5%;
+    margin-top: 1.2%;
+    margin-left: 83%;
+}
+#Balancetext{
+    position: relative;
+    margin-top: -6%;
+
+}
