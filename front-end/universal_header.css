@@ -2,13 +2,18 @@
   padding: 0px;
   margin: 0px;
 }
-.header_balk{
+.header_balk {
   background-color: #2f3749;
-  height:10%;
+  height: 10%;
   width: 100%;
   position: fixed;
   top: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
+
+
 .popup {
   position: fixed;
   top: 50%;
@@ -17,4 +22,15 @@
   border: 1px solid black;
   padding: 20px;
   display: none;
+}
+
+.header-button{
+  background-color: #aa4b4b;
+  
+  width: 80px;
+  height: 80%;
+}
+
+i{
+  z-index: -1;
 }
