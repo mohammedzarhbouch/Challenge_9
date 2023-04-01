@@ -27,6 +27,8 @@ if (!isset($_SESSION['loggedin'])) {
         <div class="info-box">welkom terug, <?=$_SESSION['name']?>!</div>
         <div class="info-box">test</div>
         <div class="info-box">test</div>
+        <a href="edit_page.php" class="button">Edit Page</a>
+
     </div>
 </body>
 </html>
