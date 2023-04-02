@@ -5,19 +5,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $repeatPassword = $_POST["Repeat-Password"];
+    $initial_balance = 0;
 
     if ($password !== $repeatPassword) {
         echo "Passwords don't match. Please try again.";
     } else {
-        // Prepare and bind the SQL statement
+        // Prepare and bind the SQL statement to insert the user information
         $stmt = $con->prepare("INSERT INTO user (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
 
-        // Execute the SQL statement
-        if ($stmt->execute() === TRUE) {
+        // Insert initial balance for the new user
+        $stmt->execute();
+        $user_id = $stmt->insert_id; // Get the ID of the newly inserted user
+
+        // Prepare and bind the SQL statement to insert the initial balance for the new user
+        $stmt = $con->prepare("INSERT INTO geld (user_id, balance) VALUES (?, ?)");
+        $stmt->bind_param("id", $user_id, $initial_balance);
+        $stmt->execute();
+
+        // Check if the SQL statements were executed successfully
+        if ($stmt->affected_rows > 0) {
             header("Location: index.html");
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error: Failed to create account. Please try again.";
         }
 
         // Close the statement
@@ -35,6 +45,7 @@ $con->close();
 		<meta charset="utf-8">
 		<title>Login</title>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
+		<link rel="stylesheet" href="style.css">
 		
 	</head>
 	<body>
