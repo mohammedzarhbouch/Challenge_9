@@ -2,10 +2,8 @@ body {
     background-color: rgb(238, 248, 255);
     -ms-overflow-style: none;
     scrollbar-width: none;
-    font-family: sans-serif ;
+    font-family: sans-serif;
 }
-
-
 
 table {
     border-collapse: collapse;
@@ -27,16 +25,26 @@ th, td {
     transform: translate(-50%, -50%);
     padding: 20px;
     width: 625px;
-    height: 200px;
+    height: auto;
     margin-top: -20px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    max-height: 200px; /* adjust the value as needed */
 }
 
+.input-container {
+    top: 280px;
+    right: 280px;
+    display: flex;
+    width: auto;
+    margin-bottom: 15px;
+    float: right;
+    position: relative;
+}
 
-
-
-input[type="text"] {
-    width: 200px;
+.input-container input {
+    
+    width: 190px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -45,45 +53,27 @@ input[type="text"] {
     margin-bottom: 16px;
     margin-left: 5px;
     resize: vertical;
-    
-}
-
-
-.input-container {
-    top: 280px;
-    right: 680px;
-    display: flex;
-    width: 250px;
-    margin-bottom: 15px;
-    float: right;
-    position: relative;
-
-    
 }
 
 .input-container button {
     background-color: #27187c;
     color: white;
-    border-radius: 10px;
+    border-radius: 50px;
     cursor: pointer;
-    margin-left: 10px;
     transition: .5s;
     font-size: 15px;
     width: 50px;
     height: 25px;
-    padding: 0px;
-    position: absolute;
-    top: 27px;
-    left: 580px;
+    padding: 1px;
+    margin-top: 25px;
+    margin-left: 10px;
 }
 
-.input-container button:hover{
-    
+.input-container button:hover {
     background-color: #2eb139;
     color: rgb(0, 0, 0);
     border-radius: 50px;
     cursor: pointer;
-    margin-left: 10px;
     
 }
 
@@ -97,8 +87,6 @@ input[type="text"] {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    
-    
 }
 
 .balance-container button {
@@ -114,40 +102,35 @@ input[type="text"] {
     height: 25px;
     margin-top: 10px;
     font-size: 15px;
-
 }
 
-.balance-container button:hover{
-    
+.balance-container button:hover {
     background-color: #2eb139;
     color: rgb(0, 0, 0);
     border-radius: 50px;
     cursor: pointer;
     margin-left: 10px;
-    
 }
 
-.balance-container input{
+.balance-container input {
     width: 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-   
     margin-bottom: 16px;
     margin-left: 5px;
-    resize: vertical;
-    
+    resize:
+ vertical;
 }
 
-h1{
+h1 {
     border-bottom: 1px solid #ddd;
 }
 
-h2{
-    
+h2 {
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid#ddd;
     font-size: 20px;
     font-weight: normal;
     

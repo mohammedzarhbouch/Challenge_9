@@ -5,9 +5,7 @@ include('conn.php');
 
 $error_message = "";
 
-
 // Insert a new expense into the database
-
 if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -27,9 +25,7 @@ if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'
     }
 }
 
-
 // Update the user's balance
-
 if(isset($_POST['balance'])) {
     $new_balance = $_POST['balance'];
     $user_id = $_SESSION['id']; // get the currently logged-in user's ID
@@ -57,6 +53,31 @@ if ($result === false) {
 
 $row = $result->fetch_assoc();
 $balance = $row['balance'];
+
+// Get the total price of all expenses for the currently logged-in user
+$user_id = $_SESSION['id'];
+$sql = "SELECT prijs FROM soort_uitgave WHERE user_id = '$user_id'";
+$result = $con->query($sql);
+
+if ($result === false) {
+    die("Invalid query: " . mysqli_error($con));
+}
+
+$total_price = 0;
+while ($row = $result->fetch_assoc()) {
+    $total_price += $row["prijs"];
+}
+
+// Calculate the new balance
+$new_balance = $balance - $total_price;
+
+
+
+$_SESSION['new_balance'] = $new_balance;
+$_SESSION['balance'] = $balance;
+
+
+
 ?>
 
 
@@ -82,8 +103,8 @@ $balance = $row['balance'];
     <div class="input-container">
         <input type="text" name="name" placeholder="Name"></input>
         <input type="text" name="description" placeholder="Description"></input> 
-        <input type="text" name="price" placeholder="Price"></input>
-        <button type="submit">X</button>
+        <input type="number" step="0.01" name="price" placeholder="Price"></input>
+        <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
 
     </div>    
         
@@ -102,7 +123,7 @@ $balance = $row['balance'];
         <div class="input-balance-container">
         <form method="post">
             <input type="number" name="balance" placeholder="New Balance">
-            <button type="submit">X</button>
+            <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
         </form>
     </div>
 </div>
@@ -140,11 +161,11 @@ $balance = $row['balance'];
                     <td>" . $row["naam"] . "</td>
                     <td>" . $row["info"] . "</td>
                     <td>" . $row["prijs"] . "</td>
-                        <td>
-                        <form method='post' action='delete.php'>
-                            <input type='hidden' name='id' value='" . $row["id"] . "'>
-                            <button type='submit'>Delete</button>
-                        </form>
+                    <td>
+                    <form method='post' action='delete.php'>
+                        <input type='hidden' name='id' value='" . $row["id"] . "'>
+                        <button type='submit'>Delete</button>
+                    </form>
                     </td>
                 </tr>";
 
