@@ -5,6 +5,7 @@ $balance = $_SESSION['balance'];
 $new_balance = $_SESSION['new_balance'];
 
 
+
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;

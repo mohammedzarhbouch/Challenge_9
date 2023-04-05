@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $repeatPassword = $_POST["Repeat-Password"];
-    $initial_balance = 0;
+    $initial_balance = 1;
 
     if ($password !== $repeatPassword) {
         echo "Passwords don't match. Please try again.";
