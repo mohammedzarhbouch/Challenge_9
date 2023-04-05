@@ -1,14 +1,51 @@
 <?php
 
 session_start();
+require_once('conn.php');
+
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
 
 
-$balance = isset($_SESSION['balance']) ? $_SESSION['balance'] : '';
-$new_balance = isset($_SESSION['new_balance']) ? $_SESSION['new_balance'] : '';
+if(isset($_SESSION['id'])) {
+    // Get the user's balance from the database
+    $user_id = $_SESSION['id'];
+    $select_query = "SELECT balance FROM geld WHERE id = '$user_id'";
+    $result = $con->query($select_query);
+
+    if ($result === false) {
+        die("Invalid query: " . mysqli_error($con));
+    }
+
+    $row = $result->fetch_assoc();
+    $balance = $row['balance'];
+
+    // Get the total price of all expenses for the currently logged-in user
+    $user_id = $_SESSION['id'];
+    $sql = "SELECT prijs FROM soort_uitgave WHERE user_id = '$user_id'";
+    $result = $con->query($sql);
+
+    if ($result === false) {
+        die("Invalid query: " . mysqli_error($con));
+    }
+
+    $total_price = 0;
+    while ($row = $result->fetch_assoc()) {
+        $total_price += $row["prijs"];
+    }
+
+    // Calculate the new balance
+    $new_balance = $balance - $total_price;
+
+    // Set the session variables
+    $_SESSION['new_balance'] = $new_balance;
+    $_SESSION['balance'] = $balance;
+
+
+
+}
 ?>
 
 
@@ -30,6 +67,7 @@ $new_balance = isset($_SESSION['new_balance']) ? $_SESSION['new_balance'] : '';
         <div class="info-box">test</div>
         <a href="edit_page.php" class="button">Edit Page</a>
         <a href="logout.php" class="button">logout</a>
+        <a href="profile.php" class="button">profile</a>
     </div>
 </body>
 </html>

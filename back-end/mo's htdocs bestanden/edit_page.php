@@ -1,12 +1,8 @@
 <?php
 session_start();
-
-
-include('conn.php');
+require_once('conn.php');
 
 $error_message = "";
-
-
 
 // Insert a new expense into the database
 if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'])) {
@@ -44,40 +40,8 @@ if(isset($_POST['balance'])) {
     }
 }
 
-// Get the user's balance from the database
-$user_id = $_SESSION['id'];
-$select_query = "SELECT balance FROM geld WHERE id = '$user_id'";
-$result = $con->query($select_query);
-
-if ($result === false) {
-    die("Invalid query: " . mysqli_error($con));
-}
-
-$row = $result->fetch_assoc();
-$balance = $row['balance'];
-
-// Get the total price of all expenses for the currently logged-in user
-$user_id = $_SESSION['id'];
-$sql = "SELECT prijs FROM soort_uitgave WHERE user_id = '$user_id'";
-$result = $con->query($sql);
-
-if ($result === false) {
-    die("Invalid query: " . mysqli_error($con));
-}
-
-$total_price = 0;
-while ($row = $result->fetch_assoc()) {
-    $total_price += $row["prijs"];
-}
-
-// Calculate the new balance
-$new_balance = $balance - $total_price;
-
-$_SESSION['new_balance'] = $new_balance;
-$_SESSION['balance'] = $balance;
-
-
-
+$new_balance = $_SESSION['new_balance'];
+$balance = $_SESSION['balance'];
 
 ?>
 
@@ -165,7 +129,7 @@ $_SESSION['balance'] = $balance;
                     <td>
                     <form method='post' action='delete.php'>
                         <input type='hidden' name='id' value='" . $row["id"] . "'>
-                        <button type='submit'>Delete</button>
+                        <button type='submit' class='delete-button'>Delete</button>
                     </form>
                     </td>
                 </tr>";
