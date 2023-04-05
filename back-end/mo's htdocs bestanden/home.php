@@ -1,18 +1,16 @@
 <?php
 
 session_start();
-$balance = $_SESSION['balance'];
-$new_balance = $_SESSION['new_balance'];
-
-
-
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
 
 
+$balance = isset($_SESSION['balance']) ? $_SESSION['balance'] : '';
+$new_balance = isset($_SESSION['new_balance']) ? $_SESSION['new_balance'] : '';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +24,7 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 <body class="loggedin">
     <div class="container">
-        <a class="title">HomePage</a>
+        <a class="title">HomePage | €<?php echo $new_balance; ?></a>
         <div class="info-box">Welcome back, <?=$_SESSION['name']?>!</div>
         <div class="info-box">This is your remaining balance after your transactions: €<?php echo $new_balance; ?></div>
         <div class="info-box">test</div>

@@ -1,9 +1,12 @@
 <?php
 session_start();
 
+
 include('conn.php');
 
 $error_message = "";
+
+
 
 // Insert a new expense into the database
 if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'])) {
@@ -18,7 +21,7 @@ if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'
         $sql = "INSERT INTO soort_uitgave (naam, info, prijs, user_id) VALUES ('$name', '$description', '$price', '$user_id')";
 
         if ($con->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($con);
         }
@@ -29,7 +32,6 @@ if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price'
 if(isset($_POST['balance'])) {
     $new_balance = $_POST['balance'];
     $user_id = $_SESSION['id']; // get the currently logged-in user's ID
-
     $update_query = "UPDATE geld SET balance = '$new_balance' WHERE id = '$user_id'";
 
     if ($con->query($update_query) === TRUE) {
@@ -71,10 +73,9 @@ while ($row = $result->fetch_assoc()) {
 // Calculate the new balance
 $new_balance = $balance - $total_price;
 
-
-
 $_SESSION['new_balance'] = $new_balance;
 $_SESSION['balance'] = $balance;
+
 
 
 
