@@ -1,0 +1,189 @@
+body {
+  color:  rgb(0, 0, 0);
+  font-family: 'Poppins', sans-serif;
+  
+  
+  background-color: #ffffff;
+}
+
+.info-box {
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  margin-bottom: 30px;
+  position: flex;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column-reverse;
+  font-size: 18px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  
+}
+
+.title {
+  font-size: 30px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+  margin: 10px auto;
+  display: block;
+  border-bottom: 1px solid #ddd;
+  width: 80%;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  margin-top: 10px;
+  position: flex;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.button {
+  display: inline-block;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+
+
+table {
+  margin: 0 auto; /* centers the table horizontally */
+  max-width: 600px; /* limits the width of the table */
+}
+
+th, td {
+  padding: 10px; /* adds some space around the table cells */
+  text-align: left; /* aligns the text in the cells to the left */
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #ffffff; /* adds a light gray background to the table header row */
+  width: 100%;
+}
+
+.delete-button {
+  background-color: #ff0000; /* sets the background color of the delete button */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: .5s;
+}
+
+.delete-button:hover {
+  background-color: #fd7b7b; /* sets the background color of the delete button when the mouse hovers over it */
+}
+
+
+
+.input-container {
+  top: 280px;
+  right: 280px;
+  display: flex;
+  width: auto;
+  margin-bottom: 15px;
+  float: right;
+  position: relative;
+}
+
+.input-container input {
+  
+  width: 190px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 16px;
+  margin-left: 5px;
+  resize: vertical;
+}
+
+.input-container button {
+  background-color: #27187c;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: .5s;
+  font-size: 15px;
+  width: 50px;
+  height: 25px;
+  padding: 1px;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+.budget-container {
+  background-color: white;
+  border-radius: 10px;
+  position: flex;
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  margin-top: -20px;
+  margin: auto;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  max-height: 200px; /* adjust the value as needed */
+  justify-content: center;
+ 
+  
+}
+
+a.budget-button{
+  background-color: #c99c1f; /* sets the background color of the delete button */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: .5s;
+  
+}
+
+a.budget-button:hover {
+  background-color: #fd7b7b; /* sets the background color of the delete button when the mouse hovers over it */
+}
+
+.bigcontainer {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  margin-top: 10px;
+  position: flex;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+}

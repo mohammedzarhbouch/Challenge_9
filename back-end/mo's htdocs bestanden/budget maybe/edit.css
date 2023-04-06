@@ -1,0 +1,140 @@
+body {
+    background-color: rgb(238, 248, 255);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#list {
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 55%;
+    left: 68%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 625px;
+    height: auto;
+    margin-top: -20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    max-height: 200px; /* adjust the value as needed */
+}
+
+.input-container {
+    top: 280px;
+    right: 280px;
+    display: flex;
+    width: auto;
+    margin-bottom: 15px;
+    float: right;
+    position: relative;
+}
+
+.input-container input {
+    
+    width: 190px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    margin-left: 5px;
+    resize: vertical;
+}
+
+.input-container button {
+    background-color: #27187c;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .5s;
+    font-size: 15px;
+    width: 50px;
+    height: 25px;
+    padding: 1px;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.input-container button:hover {
+    background-color: #2eb139;
+    color: rgb(0, 0, 0);
+    border-radius: 50px;
+    cursor: pointer;
+    
+}
+
+.balance-container {
+    background-color: rgb(255, 255, 255);
+    width: 220px;
+    height: 175px;
+    position: absolute;
+    top: 42%;
+    left: 20%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.balance-container button {
+    background-color: #27187c;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: .5s;
+    font-size: 17px;
+    width: 50px;
+    padding: 0px;
+    height: 25px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.balance-container button:hover {
+    background-color: #2eb139;
+    color: rgb(0, 0, 0);
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.balance-container input {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    margin-left: 5px;
+    resize:
+ vertical;
+}
+
+h1 {
+    border-bottom: 1px solid #ddd;
+}
+
+h2 {
+    text-align: left;
+    border-bottom: 1px solid#ddd;
+    font-size: 20px;
+    font-weight: normal;
+    
+}
+
+
+  
