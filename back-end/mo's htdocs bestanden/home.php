@@ -24,7 +24,7 @@ if(isset($_SESSION['id'])) {
 
     // Get the total price of all expenses for the currently logged-in user
     $user_id = $_SESSION['id'];
-    $sql = "SELECT prijs FROM soort_uitgave WHERE user_id = '$user_id'";
+    $sql = "SELECT price FROM soort_uitgave WHERE user_id = '$user_id'";
     $result = $con->query($sql);
 
     if ($result === false) {
@@ -33,7 +33,7 @@ if(isset($_SESSION['id'])) {
 
     $total_price = 0;
     while ($row = $result->fetch_assoc()) {
-        $total_price += $row["prijs"];
+        $total_price += $row["price"];
     }
 
     // Calculate the new balance
@@ -46,6 +46,34 @@ if(isset($_SESSION['id'])) {
 
 
 }
+
+if(isset($_POST['categorie']) &&  isset($_POST['price'])) {
+    $categorie = $_POST['categorie'];
+    $price = $_POST['price'];
+    $user_id = $_SESSION['id']; // get the currently logged-in user's ID
+
+    if(empty($categorie) || empty($price)) {
+        $error_message = "Please fill out all required fields";
+    } else {
+        $sql = "INSERT INTO budget (categorie, price, user_id) VALUES ('$categorie', '$price', '$user_id')";
+
+        if ($con->query($sql) === TRUE) {
+            header("Refresh:0");
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        }
+    }
+}   
+
+        $user_id = $_SESSION['id']; // get the currently logged-in user's ID
+        $sql = "SELECT * FROM budget WHERE user_id = '$user_id'";
+        $transactieSql = "SELECT * FROM soort_uitgave WHERE user_id = '$user_id'";
+        $result = $con->query($sql);
+        $transactieResult = $con->query($transactieSql);
+
+        if ($result === false) {
+            die("Invalid query: " . mysqli_error($con));
+        }
 ?>
 
 
@@ -61,7 +89,7 @@ if(isset($_SESSION['id'])) {
 </head>
 <body class="loggedin">
     <div class="container">
-        <a class="title">HomePage | €<?php echo $new_balance; ?></a>
+        <a class="title">HomePage | €<?php echo $balance; ?></a>
         <div class="info-box">Welcome back, <?=$_SESSION['name']?>!</div>
         <div class="info-box">This is your remaining balance after your transactions: €<?php echo $new_balance; ?></div>
         <div class="info-box">test</div>
@@ -69,5 +97,64 @@ if(isset($_SESSION['id'])) {
         <a href="logout.php" class="button">logout</a>
         <a href="profile.php" class="button">profile</a>
     </div>
+    <a class="title">Budget | Transacties</a> 
+<div class="bigcontainer">
+    
+    <div class="budget-container">
+        
+        
+        <table>
+        <thead>
+            <tr>
+                <th>Categorie</th>
+                <th>Price</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>" . $row["categorie"] . "</td>
+                        <td>€" . $row["price"] . "</td>
+                        
+                    </tr>";
+            }
+            ?>
+        </tbody>
+        </table>
+        
+    </div>
+
+    <!-- transacties -->
+    <div class="transactie-container">
+        
+        <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+             
+             while ($transactieRow = $transactieResult->fetch_assoc()) {
+                echo "<tr>
+                    <td>" . $transactieRow["name"] . "</td>
+                    <td>" . $transactieRow["info"] . "</td>
+                    <td>€" . $transactieRow["price"] . "</td>
+                   
+                </tr>";
+            }
+            
+            ?>
+        </tbody>
+        </table>
+        
+    </div>
+</div>     
 </body>
 </html>

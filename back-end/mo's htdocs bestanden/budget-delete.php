@@ -7,7 +7,7 @@ if(isset($_POST['id'])) {
     $id = $_POST['id'];
     $user_id = $_SESSION['id'];
 
-    $sql = "DELETE FROM soort_uitgave WHERE id = '$id' AND user_id = '$user_id'";
+    $sql = "DELETE FROM budget WHERE id = '$id' AND user_id = '$user_id'";
 
     if ($con->query($sql) === TRUE) {
         echo "Record deleted successfully";

@@ -40,6 +40,31 @@ if(isset($_POST['balance'])) {
     }
 }
 
+if(isset($_POST['categorie']) &&  isset($_POST['price'])) {
+    $categorie = $_POST['categorie'];
+    $price = $_POST['price'];
+    $user_id = $_SESSION['id']; // get the currently logged-in user's ID
+
+    if(empty($categorie) || empty($price)) {
+        $error_message = "Please fill out all required fields";
+    } else {
+        $sql = "INSERT INTO budget (categorie, price, user_id) VALUES ('$categorie', '$price', '$user_id')";
+
+        if ($con->query($sql) === TRUE) {
+            header("Refresh:0");
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        }
+    }
+}   
+
+
+$user_id = $_SESSION['id']; // get the currently logged-in user's ID
+$sql = "SELECT * FROM budget WHERE user_id = '$user_id'";
+$transactieSql = "SELECT * FROM soort_uitgave WHERE user_id = '$user_id'";
+$result = $con->query($sql);
+$transactieResult = $con->query($transactieSql);
+
 $new_balance = $_SESSION['new_balance'];
 $balance = $_SESSION['balance'];
 
@@ -63,82 +88,111 @@ $balance = $_SESSION['balance'];
 <body>
 
 <div class="full-container">
+    <div class="balance-container">
+        <div class="balance">
+            <h1>Balance</h1>
+            <h2>€ <?php echo $balance; ?></h2>
+        </div>
+            <div class="input-balance-container">
+            <form method="post">
+                <input type="number" name="balance" placeholder="New Balance">
+                <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
+            </form>
+        </div>
+    </div>
 
+    
+        <div class="list-container">
+        <div class="budget-list">
+        <form method="post">  
+        <a class="title">Budget</a>
+            <div class="budget-input">
+                <input type="text" name="categorie" placeholder="categorie"></input>
+                <input type="number" step="0.01" name="price" placeholder="Price"></input>
+                <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
+            </div>    
+        <?php if(!empty($error_message)) { ?>
+            <div class="error"><?php echo $error_message; ?></div>
+        <?php } ?>
+        </form>
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th>Categorie</th>
+                        <th>Price</th> 
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td>" . $row["categorie"] . "</td>
+                                <td>€" . $row["price"] . "</td>
+                                <td>
+                                <form method='post' action='budget-delete.php'>
+                                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                                    <button type='submit' class='delete-button'>Delete</button>
+                                </form>
+                                </td>
+                            </tr>";
+                    }
+                    
+                    ?>
+                </tbody>
+                </table>
+        </div>     
+    </div>
+    <div class="list-container">   
     <form method="post">
+    <a class="title" >Transactions</a>
     <div class="input-container">
+    
         <input type="text" name="name" placeholder="Name"></input>
         <input type="text" name="description" placeholder="Description"></input> 
         <input type="number" step="0.01" name="price" placeholder="Price"></input>
         <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
-
-    </div>    
-        
-        <?php if(!empty($error_message)) { ?>
-            <div class="error"><?php echo $error_message; ?></div>
-        <?php } ?>
+    </div> 
     </form>
-    
-  
+        <div class="transactie-list">
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
 
-<div class="balance-container">
-    <div class="balance">
-        <h1>Balance</h1>
-        <h2>€ <?php echo $balance; ?></h2>
-    </div>
-        <div class="input-balance-container">
-        <form method="post">
-            <input type="number" name="balance" placeholder="New Balance">
-            <button type="submit"><i class="fas fa-cloud-upload-alt"></i></button>
-        </form>
-    </div>
-</div>
+                <tbody>
 
+                <?php
 
-        
-<div id="list">
-    <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+                if ($result === false) {
+                    die("Invalid query: " . mysqli_error($con));
+                }
+                while ($transactieRow = $transactieResult->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $transactieRow["name"] . "</td>
+                            <td>" . $transactieRow["info"] . "</td>
+                            <td>€" . $transactieRow["price"] . "</td>
+                            <td>
+                            <form method='post' action='delete.php'>
+                                <input type='hidden' name='id' value='" . $transactieRow["id"] . "'>
+                                <button type='submit' class='delete-button'>Delete</button>
+                            </form>
+                            </td>
+                        </tr>";
 
-        <tbody>
-
-
-        <!-- LIST -->
-
-        <?php
-        $user_id = $_SESSION['id']; // get the currently logged-in user's ID
-        $sql = "SELECT * FROM soort_uitgave WHERE user_id = '$user_id'";
-        $result = $con->query($sql);
-
-        if ($result === false) {
-            die("Invalid query: " . mysqli_error($con));
-        }
-        
-
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                    <td>" . $row["naam"] . "</td>
-                    <td>" . $row["info"] . "</td>
-                    <td>" . $row["prijs"] . "</td>
-                    <td>
-                    <form method='post' action='delete.php'>
-                        <input type='hidden' name='id' value='" . $row["id"] . "'>
-                        <button type='submit' class='delete-button'>Delete</button>
-                    </form>
-                    </td>
-                </tr>";
-
-        }
-        
-        ?>
-        </tbody>
-    </table>
+                }
+                
+                ?>
+                </tbody>
+            </table>
+        </div>
+        </div>
 </div>
 </body>
 </html>
